@@ -43,4 +43,17 @@ test.describe.parallel('Api testing', () => {
     expect(response.status()).toBe(200);
     expect(responseBody.token).toBeTruthy();
   });
+
+  test('POST login failed', async ({ request }) => {
+
+    const response = await request.post(`${baseURL}/login`, {
+      data: {
+        email: "eve.holt@reqres.in"
+      },
+    });
+    const responseBody = JSON.parse(await response.text());
+    
+    expect(response.status()).toBe(400);
+    expect(responseBody.error).toBe('Missing password');
+  });
 })
