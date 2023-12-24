@@ -1,10 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe.parallel('Api testing', () => {
-  const baseURL = 'https://reqres.in/api';
 
   test('Get user data', async ({ request }) => {
-    const response = await request.get(`${baseURL}/users/2`);
+    const response = await request.get(`users/2`);
     const responseBody = JSON.parse(await response.text());
     
     expect(response.status()).toBe(200);
@@ -17,7 +16,7 @@ test.describe.parallel('Api testing', () => {
 
   test('POST create a new user', async ({ request }) => {
     const id = 500;
-    const response = await request.post(`${baseURL}/users`, {
+    const response = await request.post(`users`, {
       data: {
         id: id,
       },
@@ -32,7 +31,7 @@ test.describe.parallel('Api testing', () => {
 
   test('POST login', async ({ request }) => {
 
-    const response = await request.post(`${baseURL}/login`, {
+    const response = await request.post(`login`, {
       data: {
         email: "eve.holt@reqres.in",
         password: "cityslicka"
@@ -46,7 +45,7 @@ test.describe.parallel('Api testing', () => {
 
   test('POST login failed', async ({ request }) => {
 
-    const response = await request.post(`${baseURL}/login`, {
+    const response = await request.post(`login`, {
       data: {
         email: "eve.holt@reqres.in"
       },
@@ -60,7 +59,7 @@ test.describe.parallel('Api testing', () => {
   test('PUT update user', async ({ request }) => {
     const name = 'Eva';
     const job = 'rezident';
-    const response = await request.put(`${baseURL}/users/2`, {
+    const response = await request.put(`users/2`, {
       data: {
         name: name,
         job: job
@@ -76,7 +75,7 @@ test.describe.parallel('Api testing', () => {
 
   test('DELETE user', async ({ request }) => {
 
-    const response = await request.delete(`${baseURL}/users/2`);
+    const response = await request.delete(`users/2`);
     
     expect(response.status()).toBe(204);
   });
