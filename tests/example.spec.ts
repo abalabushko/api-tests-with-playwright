@@ -9,10 +9,9 @@ test.describe.parallel('Api testing', () => {
     
     expect(response.status()).toBe(200);
     expect(responseBody.data.id).toBe(2)
-    console.log(responseBody)
  
-    // expect(responseBody.data.first_name).toContainText('Janet');
-    // expect(responseBody.data.last_name).toContainText('Weaver');
+    expect(responseBody.data.first_name).toBe('Janet');
+    expect(responseBody.data.last_name).toBe('Weaver');
     expect(responseBody.data.avatar).toBeTruthy();
   });
 })
