@@ -38,7 +38,6 @@ test.describe.parallel('Api testing', () => {
       },
     });
     const responseBody = JSON.parse(await response.text());
-    
     expect(response.status()).toBe(200);
     expect(responseBody.token).toBeTruthy();
   });
@@ -66,7 +65,6 @@ test.describe.parallel('Api testing', () => {
       },
     });
     const responseBody = JSON.parse(await response.text());
-    
     expect(response.status()).toBe(200);
     expect(responseBody.name).toBe(name);
     expect(responseBody.job).toBe(job);
