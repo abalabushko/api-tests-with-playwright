@@ -2,12 +2,16 @@ import { test, expect } from '@playwright/test';
 
 test.describe.parallel('Api testing', () => {
 
+  const USERS_URL = 'users/';
+  const USER_ID = '2';
+  const LOGIN_URL = 'login';
+
   test('Get user data', async ({ request }) => {
-    const response = await request.get(`users/2`);
+    const response = await request.get(USERS_URL + USER_ID);
     const responseBody = JSON.parse(await response.text());
     
     expect(response.ok()).toBeTruthy();
-    expect(responseBody.data.id).toBe(2)
+    expect(responseBody.data.id).toBe(2);
  
     expect(responseBody.data.first_name).toBe('Janet');
     expect(responseBody.data.last_name).toBe('Weaver');
@@ -16,7 +20,7 @@ test.describe.parallel('Api testing', () => {
 
   test('POST create a new user', async ({ request }) => {
     const id = 500;
-    const response = await request.post(`users`, {
+    const response = await request.post(USERS_URL, {
       data: {
         id: id,
       },
@@ -24,14 +28,14 @@ test.describe.parallel('Api testing', () => {
     const responseBody = JSON.parse(await response.text());
     
     expect(response.ok()).toBeTruthy();
-    expect(responseBody.id).toBe(id)
+    expect(responseBody.id).toBe(id);
     expect(responseBody.createdAt).toBeTruthy();
   });
 
 
   test('POST login', async ({ request }) => {
 
-    const response = await request.post(`login`, {
+    const response = await request.post(LOGIN_URL, {
       data: {
         email: "eve.holt@reqres.in",
         password: "cityslicka"
@@ -44,7 +48,7 @@ test.describe.parallel('Api testing', () => {
 
   test('POST login failed', async ({ request }) => {
 
-    const response = await request.post(`login`, {
+    const response = await request.post(LOGIN_URL, {
       data: {
         email: "eve.holt@reqres.in"
       },
@@ -58,7 +62,7 @@ test.describe.parallel('Api testing', () => {
   test('PUT update user', async ({ request }) => {
     const name = 'Eva';
     const job = 'rezident';
-    const response = await request.put(`users/2`, {
+    const response = await request.put(USERS_URL + USER_ID, {
       data: {
         name: name,
         job: job
@@ -73,7 +77,7 @@ test.describe.parallel('Api testing', () => {
 
   test('DELETE user', async ({ request }) => {
 
-    const response = await request.delete(`users/2`);
+    const response = await request.delete(USERS_URL + USER_ID);
     
     expect(response.ok()).toBeTruthy();
   });
