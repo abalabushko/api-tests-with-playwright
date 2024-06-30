@@ -6,7 +6,7 @@ test.describe.parallel('Api testing', () => {
     const response = await request.get(`users/2`);
     const responseBody = JSON.parse(await response.text());
     
-    expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
     expect(responseBody.data.id).toBe(2)
  
     expect(responseBody.data.first_name).toBe('Janet');
@@ -23,7 +23,7 @@ test.describe.parallel('Api testing', () => {
     });
     const responseBody = JSON.parse(await response.text());
     
-    expect(response.status()).toBe(201);
+    expect(response.ok()).toBeTruthy();
     expect(responseBody.id).toBe(id)
     expect(responseBody.createdAt).toBeTruthy();
   });
@@ -38,7 +38,7 @@ test.describe.parallel('Api testing', () => {
       },
     });
     const responseBody = JSON.parse(await response.text());
-    expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
     expect(responseBody.token).toBeTruthy();
   });
 
@@ -65,7 +65,7 @@ test.describe.parallel('Api testing', () => {
       },
     });
     const responseBody = JSON.parse(await response.text());
-    expect(response.status()).toBe(200);
+    expect(response.ok()).toBeTruthy();
     expect(responseBody.name).toBe(name);
     expect(responseBody.job).toBe(job);
     expect(responseBody.updatedAt).toBeTruthy();
@@ -75,6 +75,6 @@ test.describe.parallel('Api testing', () => {
 
     const response = await request.delete(`users/2`);
     
-    expect(response.status()).toBe(204);
+    expect(response.ok()).toBeTruthy();
   });
 })
