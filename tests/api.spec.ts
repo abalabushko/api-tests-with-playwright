@@ -7,7 +7,9 @@ test.describe.parallel('Api testing', () => {
   const LOGIN_URL = 'login';
 
   test('Get user data', async ({ request }) => {
-    const response = await request.get(USERS_URL + USER_ID);
+    const response = await request.get(USERS_URL + USER_ID, {
+      headers : {'x-api-key': 'reqres-free-v1'},
+    });
     const responseBody = JSON.parse(await response.text());
     
     expect(response.ok()).toBeTruthy();
@@ -21,6 +23,7 @@ test.describe.parallel('Api testing', () => {
   test('POST create a new user', async ({ request }) => {
     const id = 500;
     const response = await request.post(USERS_URL, {
+      headers : {'x-api-key': 'reqres-free-v1'},
       data: {
         id: id,
       },
@@ -36,6 +39,7 @@ test.describe.parallel('Api testing', () => {
   test('POST login', async ({ request }) => {
 
     const response = await request.post(LOGIN_URL, {
+      headers : {'x-api-key': 'reqres-free-v1'},
       data: {
         email: "eve.holt@reqres.in",
         password: "cityslicka"
@@ -49,6 +53,7 @@ test.describe.parallel('Api testing', () => {
   test('POST login failed', async ({ request }) => {
 
     const response = await request.post(LOGIN_URL, {
+      headers : {'x-api-key': 'reqres-free-v1'},
       data: {
         email: "eve.holt@reqres.in"
       },
@@ -63,6 +68,7 @@ test.describe.parallel('Api testing', () => {
     const name = 'Eva';
     const job = 'rezident';
     const response = await request.put(USERS_URL + USER_ID, {
+      headers : {'x-api-key': 'reqres-free-v1'},
       data: {
         name: name,
         job: job
@@ -77,7 +83,9 @@ test.describe.parallel('Api testing', () => {
 
   test('DELETE user', async ({ request }) => {
 
-    const response = await request.delete(USERS_URL + USER_ID);
+    const response = await request.delete(USERS_URL + USER_ID, {
+      headers : {'x-api-key': 'reqres-free-v1'},
+    });
     
     expect(response.ok()).toBeTruthy();
   });
